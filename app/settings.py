@@ -1,4 +1,5 @@
 # Using Scotchbox with a wordpress database for testing
+# Get one here --> https://box.scotch.io/
 # Even though (and maybe because) wordpress databases suck
 DB_STRING = 'mysql+mysqldb://root:root@192.168.33.133:3306/scotchbox'
 
@@ -12,7 +13,8 @@ AUTHENTICATION_SCOPE = ''
 ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'test'
 
-# Expose endpoints by Role for each HTTP verb
+# Expose endpoints (tables) by Role for each HTTP verb
+# TODO: Add column restriction functionality as well
 AUTHENTICATION_SETTINGS = {
     'GET': {
         'wp_posts': {
