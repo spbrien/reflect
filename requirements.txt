@@ -1,0 +1,10 @@
+Cython==0.23,
+python-mimeparse==0.1.4,
+six,
+SQLAlchemy==1.0.8,
+wheel==0.24.0,
+mysql-python
+pyodbc
+psycopg2
+falcon
+requests
