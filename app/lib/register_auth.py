@@ -21,8 +21,7 @@ class AuthMiddleware(object):
                 and password == valid_password:
             return True
 
-        return True
-        # return False
+        return False
 
     # This function will be overridden by subclass
     # ----------------------------------------------
@@ -35,7 +34,7 @@ class AuthMiddleware(object):
                 return decoded.split(':') if ':' in decoded else None
             except:
                 raise falcon.HTTPBadRequest()
-        return ('admin', 'test')
+
         raise falcon.HTTPUnauthorized(
             title='Authorization required'
         )
@@ -50,9 +49,16 @@ class AuthMiddleware(object):
         resource = path.split('/')[0] if path and '/' in path else path
         method = req.method
 
+        if not resource:
+            return
+
         # Get auth schema and endpoint settings
         schema = settings.AUTHENTICATION_SETTINGS.get(method, None)
         endpoint_settings = schema.get(resource, None) if resource else None
+
+        if endpoint_settings \
+                and 'anonymous' in endpoint_settings['allowed_roles']:
+            return
 
         # Get Username and Password, or Token from Auth String
         (username, password) = self._get_account_info(req)
@@ -63,6 +69,7 @@ class AuthMiddleware(object):
                 return
             if role in endpoint_settings['allowed_roles']:
                 return
+
 
         # Else if we have the right credentials
         if self._auth_valid(username, password):

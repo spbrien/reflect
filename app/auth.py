@@ -18,4 +18,5 @@ class Authentication(AuthMiddleware):
     # def _get_account_info(self, req):
     #     pass
 
-    pass
+    def __init__(self):
+        pass

@@ -28,7 +28,7 @@ AUTHENTICATION_SETTINGS = {
     'GET': {
         'wp_posts': {
             'allowed_users': [],
-            'allowed_roles': []
+            'allowed_roles': ['anonymous']
         }
     },
     'POST': {},
