@@ -1,8 +1,6 @@
-from wsgiref import simple_server
+from livereload import Server, shell
 
 from app import app
 
-
-if __name__ == '__main__':
-    httpd = simple_server.make_server('127.0.0.1', 5000, app)
-    httpd.serve_forever()
+server = Server(app)
+server.serve(port=5000, host='localhost', open_url_delay=True)
